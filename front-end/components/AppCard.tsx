@@ -97,7 +97,7 @@ export default function AppCard({ app }: { app?: App }) {
             label={get(app, "category.name")}
             color="primary"
             size="small"
-            sx={{ mx: "px" }}
+            sx={{ mx: "6px" }}
           />
           {get(app, "tags", []).map((tag, i) => (
             <Chip
