@@ -16,6 +16,7 @@ import { getInitialValues, parseInvalidJson } from "./common";
 import ViewAppHeader from "./ViewAppHeader";
 import ViewAppInputs from "./ViewAppInputs";
 import { Button, CircularProgress } from "@mui/material";
+import ChatTextField from "../appInputComponents/ChatTextField";
 
 interface Values {
   [value: string]: any;
@@ -85,6 +86,7 @@ export default function ViewApp({ app }: Props) {
           </>
         )}
       </Formik>
+      <ChatTextField />
     </WithTableStyles>
   );
 }
