@@ -8,24 +8,18 @@ import SendIcon from '@mui/icons-material/Send';
 import axios from 'axios';
 
 export default function ChatTextField(){
-  
-    const submitStyle = {
-      position: 'fixed',
-      bottom: '80px',
-      right: '80px'
-    }
-    
-  const [initialValue, setValue] = useState('');
+      
+  const [value, setValue] = useState('');
 
     //Sending Data to the chatGPT API
     const sendingData = async() => {
       try{
         const res = await axios.post('http://localhost:8080/chat_input', {
-          initialValue
+          value
         });
         console.log(res.data);
       }catch(e){
-        console.log(e);
+        console.error(e);
       }
       setValue('');
     }
@@ -64,22 +58,27 @@ export default function ChatTextField(){
     >
     <form  onSubmit={submitChat}>
       <Stack 
-        direction="row" 
-        spacing={1} 
-        sx={submitStyle}>
-      <Textarea 
+       direction="row"
+       spacing={1}
+       sx={{
+       position: 'fixed',
+       bottom: '80px',
+       right: '80px',
+      }}
+       >
+       <Textarea
         name="Outlined" 
         placeholder="Chat Box" 
         variant="outlined" 
         onChange={userInput} 
-        value={initialValue} 
+        value={value} 
         sx={{width: 250}} 
         onKeyDown={enterSubmit} 
       />
       <Button 
         variant="contained" 
-          type='submit' 
-            sx={{height: 43}}>
+        type='submit' 
+        sx={{height: 43}}>
       <SendIcon fontSize="small" />
       </Button>
       </Stack>

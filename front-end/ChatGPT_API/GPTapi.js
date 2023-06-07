@@ -13,20 +13,21 @@ app.use(cors());
 
 app.listen(PORT, () => console.log(PORT));
 
-app.post("/chat_input", async (req, res) => {
-  let { initialValue } = req.body;
+const configuration = new Configuration({
+  organization: "org-OCQxyNplVRTgv6vXbnandxBc",
+  apiKey: process.env.GPT_API_KEY,
+});
+const openai = new OpenAIApi(configuration);
 
-  const configuration = new Configuration({
-    organization: "org-OCQxyNplVRTgv6vXbnandxBc",
-    apiKey: process.env.GPT_API_KEY,
-  });
-  const openai = new OpenAIApi(configuration);
+app.post("/chat_input", async (req, res) => {
+  let { value } = req.body;
+
   const completion = await openai.createChatCompletion({
     model: "gpt-3.5-turbo",
     messages: [
       {
         role: "user",
-        content: `${initialValue}`,
+        content: value,
       },
     ],
   });
