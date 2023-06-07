@@ -14,7 +14,7 @@ app.use(cors());
 app.listen(PORT, () => console.log(PORT));
 
 const configuration = new Configuration({
-  organization: "org-OCQxyNplVRTgv6vXbnandxBc",
+  organization: "org-ZtuhcaWbvGeEAi1i3nAU9e1j",
   apiKey: process.env.GPT_API_KEY,
 });
 const openai = new OpenAIApi(configuration);
