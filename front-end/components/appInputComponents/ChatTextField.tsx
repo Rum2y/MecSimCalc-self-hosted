@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, KeyboardEvent } from 'react';
+import { useState, ChangeEvent} from 'react';
 import Box from '@mui/joy/Box';
 import Textarea from '@mui/joy/Textarea';
 import Button from '@mui/material/Button';
@@ -27,16 +27,6 @@ export default function ChatTextField(){
     //User Input
   const userInput = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setValue(e.target.value);
-  }
-
-  //Submit Input with 'Enter' key-word
-  function enterSubmit(e: KeyboardEvent){
-    if(document.activeElement === e.target){
-      if(e.key === 'Enter'){
-        e.preventDefault();
-        sendingData();
-      } 
-    }
   }
 
   //Submit Input with 'Send' button
@@ -74,7 +64,6 @@ export default function ChatTextField(){
         onChange={userInput} 
         value={value} 
         sx={{width: 250}} 
-        onKeyDown={enterSubmit} 
       />
       <Button 
         variant="contained" 
