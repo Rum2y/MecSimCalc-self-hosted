@@ -56,7 +56,8 @@ export default function ChatTextField(){
         flexWrap: 'wrap',
       }}
     >
-    <form  onSubmit={submitChat}>
+    <form 
+      onSubmit={submitChat}>
       <Stack 
        direction="row"
        spacing={1}
