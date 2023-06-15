@@ -1,8 +1,8 @@
 import { useState, ChangeEvent} from 'react';
 import Box from '@mui/joy/Box';
-import Textarea from '@mui/joy/Textarea';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
+import Textarea from '@mui/joy/Textarea';
 import SendIcon from '@mui/icons-material/Send';
 
 import axios from 'axios';
@@ -10,18 +10,21 @@ import axios from 'axios';
 export default function ChatTextField(){
       
   const [value, setValue] = useState('');
+  const [output, setOutput] = useState('');
 
     //Sending Data to the chatGPT API
     const sendingData = async() => {
+      setOutput('');
       try{
         const res = await axios.post('http://localhost:8080/chat_input', {
           value
         });
-        console.log(res.data);
+        setOutput(res.data);
       }catch(e){
         console.error(e);
       }
       setValue('');
+
     }
 
     //User Input
@@ -37,7 +40,26 @@ export default function ChatTextField(){
 
   //Render the Chat Box
   return (
-    <Box
+    <Stack 
+    direction='column'
+    spacing={1}
+    sx={{
+      position: 'fixed',
+      bottom: '80px',
+      right: '80px',
+     }}
+    >
+      <Textarea 
+        name="Outlined" 
+        placeholder="Output.." 
+        variant="outlined" 
+        minRows={10} 
+        value={output} 
+        sx={{
+          width: 370,
+          p: 1,
+        }} />
+      <Box
       sx={{
         py: 2,
         display: 'grid',
@@ -51,11 +73,6 @@ export default function ChatTextField(){
       <Stack 
        direction="row"
        spacing={1}
-       sx={{
-       position: 'fixed',
-       bottom: '80px',
-       right: '80px',
-      }}
        >
        <Textarea
         name="Outlined" 
@@ -63,7 +80,7 @@ export default function ChatTextField(){
         variant="outlined" 
         onChange={userInput} 
         value={value} 
-        sx={{width: 250}} 
+        sx={{width: 300}} 
       />
       <Button 
         variant="contained" 
@@ -74,6 +91,8 @@ export default function ChatTextField(){
       </Stack>
     </form>
     </Box>
+    </Stack>
+    
   ) 
 }
 
