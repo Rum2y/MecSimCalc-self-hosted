@@ -13,6 +13,10 @@ export interface Category {
   description: string;
 }
 
+export interface Display{
+  disp: (setBool: boolean) => void;
+}
+
 export interface AppSection {
   id: string;
   title: string;
