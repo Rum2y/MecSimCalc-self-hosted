@@ -1,6 +1,6 @@
 {
-  "name": "Thevenin Calculator",
-  "description": "Welcome to Thevenin Calculator",
+  "name": "Quadratic Equation Calculator",
+  "description": "Welcome to the Quadratic Equation Calculator",
   "author": {
     "username": "You",
     "image": "https://source.unsplash.com/random?profile"
@@ -8,7 +8,7 @@
   "category": {
     "id": 1,
     "name": "Tutorial",
-    "description": "Apps for learning or teaching Thevenin Calculator"
+    "description": "Apps for learning or teaching quadratic equations"
   },
   "tags": [
     {
@@ -24,8 +24,7 @@
       "inputs_order": [
         "input_0",
         "input_1",
-        "input_2",
-        "input_3"
+        "input_2"
       ]
     }
   },
@@ -34,60 +33,33 @@
       "id": "input_0",
       "component": "NumberInput",
       "props": {
-        "name": "resistance",
-        "label": "Resistance",
-        "units": "Ohms",
-        "defaultValue": 100,
+        "name": "a",
+        "label": "Coefficient a",
+        "defaultValue": 1,
         "required": true,
-        "disabled": false,
-        "step": 0.001,
-        "min": 0,
-        "max": 10000
+        "disabled": false
       }
     },
     "input_1": {
       "id": "input_1",
       "component": "NumberInput",
       "props": {
-        "name": "voltage",
-        "label": "Voltage",
-        "units": "Volts",
+        "name": "b",
+        "label": "Coefficient b",
         "defaultValue": 10,
         "required": true,
-        "disabled": false,
-        "step": 0.001,
-        "min": 0,
-        "max": 10000
+        "disabled": false
       }
     },
     "input_2": {
       "id": "input_2",
       "component": "NumberInput",
       "props": {
-        "name": "current",
-        "label": "Current",
-        "units": "Amps",
-        "defaultValue": 0.1,
+        "name": "c",
+        "label": "Coefficient c",
+        "defaultValue": 0,
         "required": true,
-        "disabled": false,
-        "step": 0.001,
-        "min": 0,
-        "max": 10000
-      }
-    },
-    "input_3": {
-      "id": "input_3",
-      "component": "NumberInput",
-      "props": {
-        "name": "power",
-        "label": "Power",
-        "units": "Watts",
-        "defaultValue": 10,
-        "required": true,
-        "disabled": false,
-        "step": 0.001,
-        "min": 0,
-        "max": 10000
+        "disabled": false
       }
     }
   },
@@ -119,19 +91,10 @@
         "i": "input_2",
         "moved": false,
         "static": false
-      },
-      {
-        "w": 10,
-        "h": 1,
-        "x": 0,
-        "y": 3,
-        "i": "input_3",
-        "moved": false,
-        "static": false
       }
     ]  
   },
-  "code": "def main(inputs):\n    resistance = inputs['resistance']\n    voltage = inputs['voltage']\n    current = inputs['current']\n    power = inputs['power']\n    return {\n        'Resistance': resistance,\n        'Voltage': voltage,\n        'Current': current,\n        'Power': power\n    }",
+  "code": "def main(inputs):\n    a = inputs['a']\n    b = inputs['b']\n    c = inputs['c']\n    discriminant = b**2 - 4*a*c\n    if discriminant > 0:\n        x1 = (-b + discriminant**0.5) / (2*a)\n        x2 = (-b - discriminant**0.5) / (2*a)\n        return {'x1': x1, 'x2': x2}\n    elif discriminant == 0:\n        x = -b / (2*a)\n        return {'x': x}\n    else:\n        return 'No real roots'",
   "output_html": "<h2>Outputs</h2><p><br></p><p>&lt;table&gt;</p><p><strong style=\"color: black;\">{% for key, value in outputs %}</strong></p><p><span style=\"color: black;\">&lt;tr&gt;</span></p><p><span style=\"color: black;\">&lt;td&gt;</span><strong><u>{{ key }}</u></strong><span style=\"color: black;\">&lt;/td&gt;</span></p><p><span style=\"color: black;\">&lt;td&gt;</span>{{ value }}<span style=\"color: black;\">&lt;/td&gt;</span></p><p><span style=\"color: black;\">&lt;/tr&gt;</span></p><p><strong style=\"color: black;\">{% endfor %}</strong></p><p>&lt;/table&gt;</p>",
-  "docs_html": "<h3>Code</h3><pre class=\"ql-syntax\" spellcheck=\"false\"><span class=\"hljs-keyword\">def</span>&nbsp;<span class=\"hljs-title function_\">main</span>(<span class=\"hljs-params\">inputs</span>):\n&nbsp;&nbsp;&nbsp;&nbsp;<span class=\"hljs-keyword\">resistance</span> = inputs[<span class=\"hljs-string\">'resistance'</span>]\n&nbsp;&nbsp;&nbsp;&nbsp;<span class=\"hljs-keyword\">voltage</span> = inputs[<span class=\"hljs-string\">'voltage'</span>]\n&nbsp;&nbsp;&nbsp;&nbsp;<span class=\"hljs-keyword\">current</span> = inputs[<span class=\"hljs-string\">'current'</span>]\n&nbsp;&nbsp;&nbsp;&nbsp;<span class=\"hljs-keyword\">power</span> = inputs[<span class=\"hljs-string\">'power'</span>]\n&nbsp;&nbsp;&nbsp;&nbsp;<span class=\"hljs-keyword\">return</span> {\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class=\"hljs-string\">'Resistance'</span>: resistance,\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class=\"hljs-string\">'Voltage'</span>: voltage,\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class=\"hljs-string\">'Current'</span>: current,\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class=\"hljs-string\">'Power'</span>: power\n&nbsp;&nbsp;&nbsp;&nbsp;}</pre><p><br></p><h3>Outputs</h3><pre class=\"ql-syntax\" spellcheck=\"false\"><span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">table</span>&gt;</span>\n{% <span class=\"hljs-name\"><span class=\"hljs-name\">for</span></span> key, value <span class=\"hljs-keyword\">in</span> outputs %}\n  <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">tr</span>&gt;</span>\n      <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">td</span>&gt;</span>{{ key }}<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">td</span>&gt;</span>\n      <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">td</span>&gt;</span>{{ value }}<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">td</span>&gt;</span>\n  <span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">tr</span>&gt;</span>\n{% <span class=\"hljs-name\"><span class=\"hljs-name\">endfor</span></span> %}\n<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">table</span>&gt;</span></pre>"
+  "docs_html": "<h3>Code</h3><pre class=\"ql-syntax\" spellcheck=\"false\"><span class=\"hljs-keyword\">def</span> main(inputs):\n    a = inputs['a']\n    b = inputs['b']\n    c = inputs['c']\n    discriminant = b**2 - 4*a*c\n    if discriminant > 0:\n        x1 = (-b + discriminant**0.5) / (2*a)\n        x2 = (-b - discriminant**0.5) / (2*a)\n        return {'x1': x1, 'x2': x2}\n    elif discriminant == 0:\n        x = -b / (2*a)\n        return {'x': x}\n    else:\n        return 'No real roots'\n</pre><p><br></p><h3>Outputs</h3><pre class=\"ql-syntax\" spellcheck=\"false\"><span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">table</span>&gt;</span>\n{% <span class=\"hljs-name\"><span class=\"hljs-name\">for</span></span> key, value <span class=\"hljs-keyword\">in</span> outputs %}\n  <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">tr</span>&gt;</span>\n      <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">td</span>&gt;</span>{{ key }}<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">td</span>&gt;</span>\n      <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">td</span>&gt;</span>{{ value }}<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">td</span>&gt;</span>\n  <span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">tr</span>&gt;</span>\n{% <span class=\"hljs-name\"><span class=\"hljs-name\">endfor</span></span> %}\n<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">table</span>&gt;</span>\n</pre>"
 }

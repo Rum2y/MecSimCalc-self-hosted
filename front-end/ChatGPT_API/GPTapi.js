@@ -23,17 +23,16 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 app.post("/chat_input", async (req, res) => {
-  let { value, id } = req.body;
+  let { value, edit, id } = req.body;
   const editJson = fs.readFileSync("../../apps/hello_world.json", {
     encoding: "utf8",
     flag: "r",
   });
-  const objJson = JSON.parse(editJson);
 
   if (id === "new") {
     prompt = `write a json code that collects input from a ${value} using this format: ${jsonFormat}`;
   } else if (id === "edit") {
-    prompt = `create a ${objJson.name} using a json code that collects input using this format: ${jsonFormat}. Use this as a criteria: ${value}`;
+    prompt = `Edit this json code: \n ${editJson} \n using this edit: ${edit}`;
   }
 
   const completion = await openai.createChatCompletion({

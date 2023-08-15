@@ -9,12 +9,12 @@ import axios from 'axios';
 interface Props {
   set: (setBool: boolean) => void;
 }
-export default function CreateAppTextField({set}: Props){
+export default function CreateAppTextField({set}: Props) {
       
   const [value, setValue] = useState('');
   const [edit, setEdit] = useState('');
   let id: any;
-  // const [output, setOutput] = useState('');
+  // const [output, setOutput] = useState('') ;
 
     //Sending Data to the chatGPT API
     const sendingData = async() => {
@@ -22,6 +22,7 @@ export default function CreateAppTextField({set}: Props){
       try{
         const res = await axios.post('http://localhost:8080/chat_input', {
           value: value,
+          edit: edit,
           id: id
         });
         // setOutput(res.data);
