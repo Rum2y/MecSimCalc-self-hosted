@@ -16,10 +16,19 @@ app.use(cors());
 app.listen(PORT, () => console.log(PORT));
 
 let prompt;
+let message = [
+  {
+    role: "system",
+    content:
+      "You will follow the conversation and respond to the queries asked by the 'user's content. You will act as the assistant",
+  },
+];
+
 const configuration = new Configuration({
   organization: "org-ZtuhcaWbvGeEAi1i3nAU9e1j",
   apiKey: process.env.GPT_API_KEY,
 });
+
 const openai = new OpenAIApi(configuration);
 
 app.post("/chat_input", async (req, res) => {
@@ -30,22 +39,29 @@ app.post("/chat_input", async (req, res) => {
   });
 
   if (id === "new") {
-    prompt = `write a json code that collects input from a ${value} using this format: ${jsonFormat}`;
+    prompt = `without explanation, write a json code that collects input from a ${value} using this format: ${jsonFormat}`;
   } else if (id === "edit") {
-    prompt = `Edit this json code: \n ${editJson} \n using this edit: ${edit}`;
+    // prompt = `Edit the json code using this edit: ${edit}`;
+    prompt = edit;
   }
 
+  const newArr = (array, input, role) => {
+    array.push({
+      role: role,
+      content: input,
+    });
+  };
+  newArr(message, prompt, "user");
+
   const completion = await openai.createChatCompletion({
-    model: "gpt-3.5-turbo",
-    messages: [
-      {
-        role: "user",
-        content: prompt,
-      },
-    ],
+    model: "gpt-3.5-turbo-16k",
+    messages: message,
     temperature: 0.2,
   });
+
   const datum = completion.data.choices[0].message.content;
+
+  newArr(message, datum, "assistant");
 
   let b = datum.indexOf("{");
   function locations(substring, string) {

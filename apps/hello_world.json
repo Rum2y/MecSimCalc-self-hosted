@@ -1,6 +1,6 @@
 {
-  "name": "Quadratic Equation Calculator",
-  "description": "Welcome to the Quadratic Equation Calculator",
+  "name": "Area of Triangle Calculator",
+  "description": "Welcome to the Area of Triangle Calculator",
   "author": {
     "username": "You",
     "image": "https://source.unsplash.com/random?profile"
@@ -8,7 +8,7 @@
   "category": {
     "id": 1,
     "name": "Tutorial",
-    "description": "Apps for learning or teaching quadratic equations"
+    "description": "Apps for learning or teaching MecSimCalc"
   },
   "tags": [
     {
@@ -23,8 +23,7 @@
       "title": "User Inputs",
       "inputs_order": [
         "input_0",
-        "input_1",
-        "input_2"
+        "input_1"
       ]
     }
   },
@@ -33,33 +32,30 @@
       "id": "input_0",
       "component": "NumberInput",
       "props": {
-        "name": "a",
-        "label": "Coefficient a",
-        "defaultValue": 1,
+        "name": "base",
+        "label": "Base",
+        "units": "cm",
+        "defaultValue": 0,
         "required": true,
-        "disabled": false
+        "disabled": false,
+        "step": 0.001,
+        "min": -10000,
+        "max": 10000
       }
     },
     "input_1": {
       "id": "input_1",
       "component": "NumberInput",
       "props": {
-        "name": "b",
-        "label": "Coefficient b",
-        "defaultValue": 10,
-        "required": true,
-        "disabled": false
-      }
-    },
-    "input_2": {
-      "id": "input_2",
-      "component": "NumberInput",
-      "props": {
-        "name": "c",
-        "label": "Coefficient c",
+        "name": "height",
+        "label": "Height",
+        "units": "cm",
         "defaultValue": 0,
         "required": true,
-        "disabled": false
+        "disabled": false,
+        "step": 0.001,
+        "min": -10000,
+        "max": 10000
       }
     }
   },
@@ -82,19 +78,10 @@
         "i": "input_1",
         "moved": false,
         "static": false
-      },
-      {
-        "w": 10,
-        "h": 1,
-        "x": 0,
-        "y": 2,
-        "i": "input_2",
-        "moved": false,
-        "static": false
       }
     ]  
   },
-  "code": "def main(inputs):\n    a = inputs['a']\n    b = inputs['b']\n    c = inputs['c']\n    discriminant = b**2 - 4*a*c\n    if discriminant > 0:\n        x1 = (-b + discriminant**0.5) / (2*a)\n        x2 = (-b - discriminant**0.5) / (2*a)\n        return {'x1': x1, 'x2': x2}\n    elif discriminant == 0:\n        x = -b / (2*a)\n        return {'x': x}\n    else:\n        return 'No real roots'",
+  "code": "def main(inputs):\n    base = inputs['base']\n    height = inputs['height']\n    area = 0.5 * base * height\n    return {'Area': area}",
   "output_html": "<h2>Outputs</h2><p><br></p><p>&lt;table&gt;</p><p><strong style=\"color: black;\">{% for key, value in outputs %}</strong></p><p><span style=\"color: black;\">&lt;tr&gt;</span></p><p><span style=\"color: black;\">&lt;td&gt;</span><strong><u>{{ key }}</u></strong><span style=\"color: black;\">&lt;/td&gt;</span></p><p><span style=\"color: black;\">&lt;td&gt;</span>{{ value }}<span style=\"color: black;\">&lt;/td&gt;</span></p><p><span style=\"color: black;\">&lt;/tr&gt;</span></p><p><strong style=\"color: black;\">{% endfor %}</strong></p><p>&lt;/table&gt;</p>",
-  "docs_html": "<h3>Code</h3><pre class=\"ql-syntax\" spellcheck=\"false\"><span class=\"hljs-keyword\">def</span> main(inputs):\n    a = inputs['a']\n    b = inputs['b']\n    c = inputs['c']\n    discriminant = b**2 - 4*a*c\n    if discriminant > 0:\n        x1 = (-b + discriminant**0.5) / (2*a)\n        x2 = (-b - discriminant**0.5) / (2*a)\n        return {'x1': x1, 'x2': x2}\n    elif discriminant == 0:\n        x = -b / (2*a)\n        return {'x': x}\n    else:\n        return 'No real roots'\n</pre><p><br></p><h3>Outputs</h3><pre class=\"ql-syntax\" spellcheck=\"false\"><span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">table</span>&gt;</span>\n{% <span class=\"hljs-name\"><span class=\"hljs-name\">for</span></span> key, value <span class=\"hljs-keyword\">in</span> outputs %}\n  <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">tr</span>&gt;</span>\n      <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">td</span>&gt;</span>{{ key }}<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">td</span>&gt;</span>\n      <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">td</span>&gt;</span>{{ value }}<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">td</span>&gt;</span>\n  <span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">tr</span>&gt;</span>\n{% <span class=\"hljs-name\"><span class=\"hljs-name\">endfor</span></span> %}\n<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">table</span>&gt;</span>\n</pre>"
+  "docs_html": "<h3>Code</h3><pre class=\"ql-syntax\" spellcheck=\"false\"><span class=\"hljs-keyword\">def</span>&nbsp;<span class=\"hljs-title function_\">main</span>(<span class=\"hljs-params\">inputs</span>):\n&nbsp;&nbsp;&nbsp;&nbsp;<span class=\"hljs-keyword\">base</span> = inputs[<span class=\"hljs-string\">'base'</span>]\n&nbsp;&nbsp;&nbsp;&nbsp;<span class=\"hljs-keyword\">height</span> = inputs[<span class=\"hljs-string\">'height'</span>]\n&nbsp;&nbsp;&nbsp;&nbsp;<span class=\"hljs-keyword\">area</span> = 0.5 * base * height\n&nbsp;&nbsp;&nbsp;&nbsp;<span class=\"hljs-keyword\">return</span> {<span class=\"hljs-string\">'Area'</span>: area}\n</pre><p><br></p><h3>Outputs</h3><pre class=\"ql-syntax\" spellcheck=\"false\"><span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">table</span>&gt;</span>\n{% <span class=\"hljs-name\"><span class=\"hljs-name\">for</span></span> key, value <span class=\"hljs-keyword\">in</span> outputs %}\n  <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">tr</span>&gt;</span>\n      <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">td</span>&gt;</span>{{ key }}<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">td</span>&gt;</span>\n      <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">td</span>&gt;</span>{{ value }}<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">td</span>&gt;</span>\n  <span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">tr</span>&gt;</span>\n{% <span class=\"hljs-name\"><span class=\"hljs-name\">endfor</span></span> %}\n<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">table</span>&gt;</span>\n</pre>"
 }
