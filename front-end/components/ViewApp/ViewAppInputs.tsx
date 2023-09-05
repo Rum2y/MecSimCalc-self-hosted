@@ -35,14 +35,14 @@ export default function ViewAppInputs({ app }: Props) {
             get(
               app,
               `input_layout.${section}`,
-              inputs_order.map((i: string) => ({
+              inputs_order?.map((i: string) => ({
                 i,
                 x: 0,
                 y: 0,
                 w: cols || GRID_LAYOUT_COLS,
                 h: 1,
               })) // default if no layout
-            ).map(
+            )?.map(
               (l: Layout) => omit(l, ["isDraggable", "isResizable"]) as Layout
             ), // (ii) remove certain attributes from layout
             ["y", "x"] // (iii) sort layout by row/col for tabIndex order
